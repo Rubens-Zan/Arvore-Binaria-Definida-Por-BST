@@ -6,6 +6,8 @@
 #define MAX_RESULTADOS 100
 static char comandos[MAX_RESULTADOS][50];     /* matriz com expressões testadas   */
 static char expressoes[MAX_RESULTADOS][50];     /* matriz com resultados das expressões testadas   */
+static char chaves[MAX_RESULTADOS][50];     /* matriz com resultados das expressões testadas   */
+
 static unsigned int nResultados = 0;            /* quantidade de resultados do arquivo */
 static unsigned int resultadoAtual = -1;        /* qual o resultado atual */
 /* -------------------------------------------------------------------------- */
@@ -30,6 +32,36 @@ void tratarExpressoes(char *line){
     char delim[] = " \t\r\n\v\f";
     strcpy(comandos[nResultados], strtok(line, delim)); 
     strcpy(expressoes[nResultados], strtok(NULL, delim));  
+    comandos[nResultados][strlen(comandos[nResultados])] = '\0';
+    expressoes[nResultados][strlen(expressoes[nResultados])] = '\0';
+    
+}
+/* -------------------------------------------------------------------------- */
+int somarChave(const char * expressao){
+    int i = 0; 
+    int res = 0; 
+
+    while (expressao[i] != '\0' && expressao[i] != ' '){
+        if (expressao[i] == '('){
+            i++; 
+            if(!(expressao[i+1] >= 48 && expressao[i+1] <= 57)){
+                res+= expressao[i] - '0'; 
+            }
+            else {
+                int k = 0;
+                char novoValor[50]; 
+                for (int j = i;(expressao[j] >= 48 && expressao[j] <= 57);j++){
+                    k++;  
+                } 
+                strncpy(novoValor, &expressao[i], k);
+                i += k;   
+                res+= atoi(novoValor); 
+            } 
+
+        }
+        i++; 
+    }
+    return res; 
 }
 /* -------------------------------------------------------------------------- */
 char *expressaoAtual(void){
@@ -39,3 +71,4 @@ char *expressaoAtual(void){
 char *comandoAtual(void){
     return comandos[resultadoAtual];
 }
+/* -------------------------------------------------------------------------- */
