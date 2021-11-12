@@ -17,20 +17,20 @@ void testaArvoreBinaria(){
         arvoresB[index] = NULL; 
 
         if (strcmp(comando, "i") == 0 ){
-            arvoresB[index] = montaarvore(expressao, &chave); 
-            printf("INCLUA %s\n",expressao);
-            int teste = somarChave(expressao);
-            printf("TESTE:: :: %d\n\n", teste); 
+            arvoresB[index] = montaarvore(expressao, &chave);
+            printf("Incluindo %s\n",expressao);
             arvoreA = inclui(arvoreA, chave); 
+            arvoreResultante(arvoreA); 
+            printf("\n\n"); 
 
-            emordem(arvoreA);  
-            // TODO
-            // emordem(arvoresB[index]);
-            index ++;
+            index++;
         }
         else if (strcmp(comando,"r") == 0){
-            
             printf("REMOVA, '%s'\n", expressao);
+            arvoresB[index] = montaarvore(expressao, &chave);
+            // TODOOO
+            // arvoreA = exclui(busca(arvoreA, chave), arvoreA);
+            arvoreResultante(arvoreA); 
         }
         else if (!strcmp(comando, "b")){
             // printf("BUSCAR, '%s' \n", expressao);
