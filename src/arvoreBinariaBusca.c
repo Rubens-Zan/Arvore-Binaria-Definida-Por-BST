@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "biblioteca.h"
 #include "arvoreBinariaBusca.h"
 
 /* -------------------------------------------------------------------------- */
-tNo *inicia(const char *valor)
+tArvoreB *inicia(const char *valor)
 {
-    tNo *n = (tNo *)malloc(sizeof(tNo));
+    tArvoreB *n = (tArvoreB *)malloc(sizeof(tArvoreB));
     n->chave = atoi(valor);
     n->dir = NULL;
     n->esq = NULL;
@@ -13,9 +14,9 @@ tNo *inicia(const char *valor)
     return n;
 }
 /* -------------------------------------------------------------------------- */
-tNo *criaNo(int chave)
+tArvoreB *criaNo(int chave)
 {
-    tNo *n = (tNo *)malloc(sizeof(tNo));
+    tArvoreB *n = (tArvoreB *)malloc(sizeof(tArvoreB));
     n->chave = chave;
     n->esq = NULL;
     n->dir = NULL;
@@ -23,7 +24,7 @@ tNo *criaNo(int chave)
     return n;
 };
 /* -------------------------------------------------------------------------- */
-tNo *inclui(tNo *no, int c)
+tArvoreB *inclui(tArvoreB *no, int c)
 {
     if (no == NULL)
         return criaNo(c);
@@ -40,45 +41,66 @@ tNo *inclui(tNo *no, int c)
     return no;
 };
 /* -------------------------------------------------------------------------- */
-int token_to_num(const char *str, int *indice, int * chave)
+int token_to_num(const char *str, int *indice)
 {
     char token[100];
     int i = 0;
-    while (str[*indice] != '(' && str[*indice] != ')' && str[*indice] != ' ')
-    {
-        token[i] = str[*indice];
-        i++;
+    if (str[*indice] == '('){
         (*indice)++;
+        if  (!(ehNumero(str[*indice]))){
+            (*indice)++;
+            return NULL;
+        }
+        
+        while (ehNumero(str[*indice]))
+        {
+            token[i] = str[*indice];
+            i++;
+            (*indice)++;
+        }
+        token[i] = '\0';
+        return 
+            atoi(token);
     }
-    token[i] = '\0';
-    (*chave) += atoi(token); 
+    
     (*indice)++;
-    return 
-        atoi(token);
+    return NULL; 
 };
 /* -------------------------------------------------------------------------- */
-tNo *montaarvore(const char *str, int * chave)
+tArvoreB *montaarvore(const char *str)
 {
-    tNo *raiz = NULL;
-    int res = 0;
-    int i = 0, v = 0;
-    raiz = inclui(NULL, token_to_num(str, &i, chave));
+    tArvoreB *raiz = NULL;
+    int i = 0;
+    raiz = inclui(NULL, token_to_num(str, &i));
     while (str[i] != '\0')
     {
-        inclui(raiz, token_to_num(str, &i, chave));
+        if (str[i] == '(' && ehNumero(str[i+1]))
+            inclui(raiz, token_to_num(str, &i));
+        else 
+            i++; 
     } 
     return raiz;
 };
-/* -------------------------------------------------------------------------- */
 
-tNo *montaArvorePrincipal(int chave)
-{
-    tNo *raiz = NULL;
-    raiz = inclui(NULL, chave);
-    return raiz;
-};
 /* -------------------------------------------------------------------------- */
-void emordem(tNo *no)
+void calculaChaveArvore(tArvoreB *no, int *chave){
+    if (no != NULL)
+    {
+        calculaChaveArvore(no->esq, chave);
+        (*chave) += no->chave; 
+        calculaChaveArvore(no->dir, chave);
+    }
+}
+/* -------------------------------------------------------------------------- */
+void preordem(tArvoreB *no){
+    if (no != NULL){
+        printf(" %d \n", no->chave); 
+        preordem(no->dir);
+        preordem(no->esq);
+    }
+}
+/* -------------------------------------------------------------------------- */
+void emordem(tArvoreB *no)
 {   
     if (no != NULL)
     {
@@ -88,7 +110,7 @@ void emordem(tNo *no)
     }
 };
 /* -------------------------------------------------------------------------- */
-void arvoreResultante(tNo *no)
+void arvoreResultante(tArvoreB *no)
 { 
     printf("["); 
     if (no != NULL)
@@ -104,9 +126,9 @@ void arvoreResultante(tNo *no)
     printf("]\n"); 
 };
 /* -------------------------------------------------------------------------- */
-tNo *exclui(tNo *no, tNo *raiz)
+tArvoreB *exclui(tArvoreB *no, tArvoreB *raiz)
 {
-    tNo *s, *novaRaiz = raiz;
+    tArvoreB *s, *novaRaiz = raiz;
     if (no->esq == NULL)
     {
         ajustaNoPai(no, no->dir);
@@ -134,9 +156,9 @@ tNo *exclui(tNo *no, tNo *raiz)
     return novaRaiz;
 };
 /* -------------------------------------------------------------------------- */
-tNo *sucessor(tNo *no)
+tArvoreB *sucessor(tArvoreB *no)
 {
-    tNo *s = NULL;
+    tArvoreB *s = NULL;
     if (no->dir != NULL)
         return min(no->dir);
     else
@@ -151,7 +173,7 @@ tNo *sucessor(tNo *no)
     return s;
 };
 /* -------------------------------------------------------------------------- */
-void ajustaNoPai(tNo *no, tNo *novo)
+void ajustaNoPai(tArvoreB *no, tArvoreB *novo)
 {
     if (no->pai != NULL)
     {
@@ -164,7 +186,7 @@ void ajustaNoPai(tNo *no, tNo *novo)
     }
 };
 /* -------------------------------------------------------------------------- */
-tNo *busca(tNo *no, int chave)
+tArvoreB *busca(tArvoreB *no, int chave)
 {
     if (no == NULL)
         return NULL;
@@ -176,7 +198,7 @@ tNo *busca(tNo *no, int chave)
         return busca(no->dir, chave);
 };
 /* -------------------------------------------------------------------------- */
-tNo *min(tNo *no)
+tArvoreB *min(tArvoreB *no)
 {
     if (no->esq == NULL)
         return no;

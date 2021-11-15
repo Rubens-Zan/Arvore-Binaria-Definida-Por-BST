@@ -4,33 +4,37 @@
 
 #include "biblioteca.h"
 #include "estruturas.h"
+#include "arvoreBinariaA.h"
+
 #include "arvoreBinariaBusca.h"
 
 void testaArvoreBinaria(){
-    tNo *arvoresB[30];
-    tNo *arvoreA = NULL; 
+    tArvoreB *arvoresB[30];
+    tArvoreA *arvoreA = NULL; 
     int index = 0; 
     while (proximaExpressao()){
+        int i = 0; 
         int chave = 0;
         char *comando = comandoAtual(); 
         char *expressao = expressaoAtual();
         arvoresB[index] = NULL; 
 
         if (strcmp(comando, "i") == 0 ){
-            arvoresB[index] = montaarvore(expressao, &chave);
-            printf("Incluindo %s\n",expressao);
-            arvoreA = inclui(arvoreA, chave); 
-            arvoreResultante(arvoreA); 
-            printf("\n\n"); 
+            int chaveArvore = 0; 
+            printf(" INCLUA   %s\n",expressao);
+            arvoresB[index] = montaarvore(expressao);
+            calculaChaveArvore(arvoresB[index], &chaveArvore); 
+            arvorePrincipalInclui(&arvoreA, arvoresB[index], chaveArvore); 
+            
 
             index++;
         }
         else if (strcmp(comando,"r") == 0){
             printf("REMOVA, '%s'\n", expressao);
-            arvoresB[index] = montaarvore(expressao, &chave);
+            // arvoresB[index] = montaarvore(expressao);
             // TODOOO
             // arvoreA = exclui(busca(arvoreA, chave), arvoreA);
-            arvoreResultante(arvoreA); 
+            // arvoreResultante(arvoreA); 
         }
         else if (!strcmp(comando, "b")){
             // printf("BUSCAR, '%s' \n", expressao);

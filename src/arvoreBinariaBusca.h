@@ -1,15 +1,18 @@
 #include "estruturas.h"
 
-tNo *criaNo(int chave);
-tNo *inclui(tNo *no, int c);
-int token_to_num(const char *str, int *indice, int * chave);
-tNo *montaarvore(const char *str, int * chave);
-tNo *montaArvorePrincipal(int chave);
-void emordem(tNo *no);
-tNo *exclui(tNo *no, tNo *raiz);
-tNo *sucessor(tNo *no);
-void ajustaNoPai(tNo *no, tNo *novo);
-tNo *busca(tNo *no, int chave); 
-tNo *min(tNo *no); 
+tArvoreB *criaNo(int chave);
+tArvoreB *inclui(tArvoreB *no, int c);
+int token_to_num(const char *str, int *indice);
+tArvoreB *montaarvore(const char *str);
 
-void arvoreResultante(tNo *no); 
+tArvoreB *montaArvorePrincipal(tArvoreB *arvoreB, int chave);
+void calculaChaveArvore(tArvoreB *no, int *chave); 
+void emordem(tArvoreB *no);
+void preordem(tArvoreB *no); 
+tArvoreB *exclui(tArvoreB *no, tArvoreB *raiz);
+tArvoreB *sucessor(tArvoreB *no);
+void ajustaNoPai(tArvoreB *no, tArvoreB *novo);
+tArvoreB *busca(tArvoreB *no, int chave); 
+tArvoreB *min(tArvoreB *no); 
+
+void arvoreResultante(tArvoreB *no); 
