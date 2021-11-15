@@ -21,6 +21,7 @@ tArvoreB *criaNo(int chave)
     n->esq = NULL;
     n->dir = NULL;
     n->pai = NULL;
+    
     return n;
 };
 /* -------------------------------------------------------------------------- */
@@ -82,14 +83,6 @@ tArvoreB *montaarvore(const char *str)
     return raiz;
 };
 /* -------------------------------------------------------------------------- */
-void preordem(tArvoreB *no){
-    if (no != NULL){
-        printf(" %d \n", no->chave); 
-        preordem(no->dir);
-        preordem(no->esq);
-    }
-}
-/* -------------------------------------------------------------------------- */
 void emordem(tArvoreB *no)
 {   
     if (no != NULL)
@@ -100,98 +93,3 @@ void emordem(tArvoreB *no)
     }
 };
 /* -------------------------------------------------------------------------- */
-// void arvoreResultante(tArvoreB *no)
-// { 
-//     printf("["); 
-//     if (no != NULL)
-//     {
-//         printf("%d\n", no->chave);  
-//         if (no->dir != NULL || no->esq != NULL){
-//             arvoreResultante(no->esq);
-//             arvoreResultante(no->dir);
-//         }
-//     }else{
-//         printf("\n"); 
-//     }
-//     printf("]\n"); 
-// };
-/* -------------------------------------------------------------------------- */
-tArvoreB *exclui(tArvoreB *no, tArvoreB *raiz)
-{
-    tArvoreB *s, *novaRaiz = raiz;
-    if (no->esq == NULL)
-    {
-        ajustaNoPai(no, no->dir);
-        free(no);
-    }
-    else
-    {
-        if (no->dir == NULL)
-        {
-            ajustaNoPai(no, no->esq);
-            free(no);
-        }
-        else
-        {
-            s = sucessor(no);
-            ajustaNoPai(s, s->dir);
-            s->esq = no->esq;
-            s->dir = no->dir;
-            ajustaNoPai(no, s);
-            if (no == raiz)
-                novaRaiz = s;
-            free(no);
-        }
-    }
-    return novaRaiz;
-};
-/* -------------------------------------------------------------------------- */
-tArvoreB *sucessor(tArvoreB *no)
-{
-    tArvoreB *s = NULL;
-    if (no->dir != NULL)
-        return min(no->dir);
-    else
-    {
-        s = no->pai;
-        while (s != NULL && no == s->dir)
-        {
-            no = s;
-            s = s->pai;
-        }
-    }
-    return s;
-};
-/* -------------------------------------------------------------------------- */
-void ajustaNoPai(tArvoreB *no, tArvoreB *novo)
-{
-    if (no->pai != NULL)
-    {
-        if (no->pai->esq == no)
-            no->pai->esq = novo;
-        else
-            no->pai->dir = novo;
-        if (novo != NULL)
-            novo->pai = no->pai;
-    }
-};
-/* -------------------------------------------------------------------------- */
-tArvoreB *busca(tArvoreB *no, int chave)
-{
-    if (no == NULL)
-        return NULL;
-    if (no->chave == chave)
-        return no;
-    if (chave < no->chave)
-        return busca(no->esq, chave);
-    else
-        return busca(no->dir, chave);
-};
-/* -------------------------------------------------------------------------- */
-tArvoreB *min(tArvoreB *no)
-{
-    if (no->esq == NULL)
-        return no;
-    else
-        return min(no->esq);
-};

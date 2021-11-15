@@ -78,3 +78,45 @@ void arvoreResultante(tArvoreA *arvoreA){
     printf("]\n"); 
 }
 /* -------------------------------------------------------------------------- */
+tArvoreB *buscaArvoreB(tArvoreA *arvoreA, int chave)
+{
+    if (arvoreA == NULL)
+        return 0;
+    else{
+        imprimeNosArvorePrincipal(arvoreA->chave); 
+        printf("\n"); 
+        int chaveArvore = 0;
+        calculaChaveArvore(arvoreA->chave, &chaveArvore); 
+
+        if ( chaveArvore == chave)
+            return arvoreA->chave;
+        if (chave < chaveArvore)
+            return buscaArvoreB(arvoreA->esq, chave);
+        else
+            return buscaArvoreB(arvoreA->dir, chave);
+    }
+};
+/* -------------------------------------------------------------------------- */
+void ajustaNoPai(tArvoreA *no, tArvoreA *novo){
+    if (no->pai != NULL){
+        if (no->pai->esq == no){
+
+        }
+    }
+}
+/* -------------------------------------------------------------------------- */
+
+tArvoreA *excluiNoArvoreA(tArvoreB *arvoreB, tArvoreA *arvoreA){
+    tArvoreA *s,*novaArvore = arvoreA; 
+    if (arvoreB->esq == NULL){
+
+    }
+    else{
+        if (arvoreB->dir == NULL){
+
+        }else{
+            
+        }
+    }
+    return novaArvore; 
+}

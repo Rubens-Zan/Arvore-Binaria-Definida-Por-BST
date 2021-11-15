@@ -30,12 +30,22 @@ void testaArvoreBinaria(){
         }
         else if (strcmp(comando,"r") == 0){
             printf("REMOVA, '%s'\n", expressao);
-            // arvoresB[index] = montaarvore(expressao);
-            // arvoreA = exclui(busca(arvoreA, chave), arvoreA);
-            // arvoreResultante(arvoreA); 
+            calculaChaveArvore(montaarvore(expressao), &chaveArvore); 
+            
+
         }
         else if (!strcmp(comando, "b")){
-            // printf("BUSCAR, '%s' \n", expressao);
+            printf("BUSCAR, '%s' \n", expressao);
+            calculaChaveArvore(montaarvore(expressao), &chaveArvore);
+            tArvoreB *arvoreAux = buscaArvoreB(arvoreA,chaveArvore);
+            if (arvoreAux != NULL)
+            {
+                printf("Achou ");
+                imprimeNosArvorePrincipal(arvoreAux); 
+                printf("\n\n"); 
+            }else {
+                printf("Nao achou!\n\n"); 
+            }
         }
     }
 }
