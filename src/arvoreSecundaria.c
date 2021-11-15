@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "biblioteca.h"
-#include "arvoreBinariaBusca.h"
+#include "arvoreSecundaria.h"
 
 /* -------------------------------------------------------------------------- */
 tArvoreB *inicia(const char *valor)
@@ -49,7 +49,7 @@ int token_to_num(const char *str, int *indice)
         (*indice)++;
         if  (!(ehNumero(str[*indice]))){
             (*indice)++;
-            return NULL;
+            return 0;
         }
         
         while (ehNumero(str[*indice]))
@@ -64,7 +64,7 @@ int token_to_num(const char *str, int *indice)
     }
     
     (*indice)++;
-    return NULL; 
+    return 0; 
 };
 /* -------------------------------------------------------------------------- */
 tArvoreB *montaarvore(const char *str)
@@ -81,16 +81,6 @@ tArvoreB *montaarvore(const char *str)
     } 
     return raiz;
 };
-
-/* -------------------------------------------------------------------------- */
-void calculaChaveArvore(tArvoreB *no, int *chave){
-    if (no != NULL)
-    {
-        calculaChaveArvore(no->esq, chave);
-        (*chave) += no->chave; 
-        calculaChaveArvore(no->dir, chave);
-    }
-}
 /* -------------------------------------------------------------------------- */
 void preordem(tArvoreB *no){
     if (no != NULL){
@@ -110,21 +100,21 @@ void emordem(tArvoreB *no)
     }
 };
 /* -------------------------------------------------------------------------- */
-void arvoreResultante(tArvoreB *no)
-{ 
-    printf("["); 
-    if (no != NULL)
-    {
-        printf("%d\n", no->chave);  
-        if (no->dir != NULL || no->esq != NULL){
-            arvoreResultante(no->esq);
-            arvoreResultante(no->dir);
-        }
-    }else{
-        printf("\n"); 
-    }
-    printf("]\n"); 
-};
+// void arvoreResultante(tArvoreB *no)
+// { 
+//     printf("["); 
+//     if (no != NULL)
+//     {
+//         printf("%d\n", no->chave);  
+//         if (no->dir != NULL || no->esq != NULL){
+//             arvoreResultante(no->esq);
+//             arvoreResultante(no->dir);
+//         }
+//     }else{
+//         printf("\n"); 
+//     }
+//     printf("]\n"); 
+// };
 /* -------------------------------------------------------------------------- */
 tArvoreB *exclui(tArvoreB *no, tArvoreB *raiz)
 {

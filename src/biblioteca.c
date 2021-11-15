@@ -6,7 +6,6 @@
 #define MAX_RESULTADOS 100
 static char comandos[MAX_RESULTADOS][50];     /* matriz com expressões testadas   */
 static char expressoes[MAX_RESULTADOS][50];     /* matriz com resultados das expressões testadas   */
-static char chaves[MAX_RESULTADOS][50];     /* matriz com resultados das expressões testadas   */
 
 static unsigned int nResultados = 0;            /* quantidade de resultados do arquivo */
 static unsigned int resultadoAtual = -1;        /* qual o resultado atual */

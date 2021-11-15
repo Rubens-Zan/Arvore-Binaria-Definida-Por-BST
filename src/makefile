@@ -6,8 +6,8 @@
 CFLAGS = -Wall -g
 
 MODULOS = biblioteca \
-	arvoreBinariaA \
-	arvoreBinariaBusca
+	arvorePrincipal \
+	arvoreSecundaria
 
 OBJETOS = busca.o $(addsuffix .o,$(MODULOS)) 
 
