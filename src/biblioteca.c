@@ -4,71 +4,68 @@
 #include "biblioteca.h"
 
 #define MAX_RESULTADOS 100
-static char comandos[MAX_RESULTADOS][50];     /* matriz com expressões testadas   */
-static char expressoes[MAX_RESULTADOS][50];     /* matriz com resultados das expressões testadas   */
+static char comandos[MAX_RESULTADOS][50];       /* matriz com os comandos a serem testados   */
+static char expressoes[MAX_RESULTADOS][50];     /* matriz com expressoes de arvores em parenteses aninhados */
 
-static unsigned int nResultados = 0;            /* quantidade de resultados do arquivo */
-static unsigned int resultadoAtual = -1;        /* qual o resultado atual */
+static unsigned int nComandos = 0;              /* quantidade de comandos do arquivo recebido */
+static unsigned int comAtual = -1;              /* qual o comando atual */
 /* -------------------------------------------------------------------------- */
-unsigned int proximaExpressao(void) {
-  resultadoAtual++;
-  return(resultadoAtual < nResultados);
+unsigned int proximoComando(void) {
+  comAtual++;
+  return(comAtual < nComandos);
 }
 /* -------------------------------------------------------------------------- */
-void carregarExpressoes(){
+void carregarComandos(){
     char * line = NULL;
     size_t len = 0;
     size_t read;
     
     while ((read = getline(&line, &len, stdin)) != -1) {
         tratarExpressoes(line); 
-        nResultados++;
+        nComandos++;
     }
 }
 /* -------------------------------------------------------------------------- */
 void tratarExpressoes(char *line){
     line[strlen(line)-1] = '\0';
     char delim[] = " \t\r\n\v\f";
-    strcpy(comandos[nResultados], strtok(line, delim)); 
-    strcpy(expressoes[nResultados], strtok(NULL, delim));  
-    comandos[nResultados][strlen(comandos[nResultados])] = '\0';
-    expressoes[nResultados][strlen(expressoes[nResultados])] = '\0';
+    strcpy(comandos[nComandos], strtok(line, delim)); 
+    strcpy(expressoes[nComandos], strtok(NULL, delim));  
+    comandos[nComandos][strlen(comandos[nComandos])] = '\0';
+    expressoes[nComandos][strlen(expressoes[nComandos])] = '\0';
     
 }
 /* -------------------------------------------------------------------------- */
 int somarChave(const char * expressao){
     int i = 0; 
-    int res = 0; 
+    int chave = 0; 
 
     while (expressao[i] != '\0' && expressao[i] != ' '){
         if (expressao[i] == '('){
             i++; 
-            if(!(expressao[i+1] >= 48 && expressao[i+1] <= 57)){
-                res+= expressao[i] - '0'; 
+            if(!(ehNumero(expressao[i+1]))){
+                chave+= expressao[i] - '0'; 
             }
             else {
-                int k = 0;
                 char novoValor[50]; 
-                for (int j = i;(expressao[j] >= 48 && expressao[j] <= 57);j++){
-                    k++;  
+                for (int j = i;(ehNumero(expressao[j]));j++){
+                    novoValor[j] = expressao[j];
+                    i++; 
                 } 
-                strncpy(novoValor, &expressao[i], k);
-                i += k;   
-                res+= atoi(novoValor); 
+                chave+= atoi(novoValor); 
             } 
-
         }
         i++; 
     }
-    return res; 
+    return chave; 
 }
 /* -------------------------------------------------------------------------- */
 char *expressaoAtual(void){
-    return expressoes[resultadoAtual];
+    return expressoes[comAtual];
 }
 /* -------------------------------------------------------------------------- */
 char *comandoAtual(void){
-    return comandos[resultadoAtual];
+    return comandos[comAtual];
 }
 /* -------------------------------------------------------------------------- */
 int ehNumero (char c){

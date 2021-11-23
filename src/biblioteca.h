@@ -1,7 +1,7 @@
-void carregarExpressoes(); 
+void carregarComandos(); 
 void tratarExpressoes(char *line); 
 int somarChave(const char * expressao); 
-unsigned int proximaExpressao(void); 
+unsigned int proximoComando(void); 
 char *expressaoAtual(void); 
 char *comandoAtual(void); 
 int ehNumero (char c); 
