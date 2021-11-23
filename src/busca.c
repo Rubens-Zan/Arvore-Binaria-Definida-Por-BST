@@ -26,7 +26,7 @@ void testaArvoreBinaria(){
             tArvoreA *arvoreAux = buscaArvoreB(arvoreA,chaveArvore);
             if (arvoreAux != NULL)
             {
-                imprimeNosArvorePrincipal(arvoreAux->chave); 
+                imprimeNosEmOrdem(arvoreAux->chave); 
                 printf(": %d\n\n", chaveArvore);
                 
             }else {
@@ -49,13 +49,9 @@ void testaArvoreBinaria(){
                 calculaChaveArvore(montaarvore(expressao), &chaveArvore);    
                 tArvoreA *arvoreAux = buscaArvoreB(arvoreA, chaveArvore);
 
-                // Checagem se a subarvore passada existe na arvore principal
+                // Checagem se a subarvore passada (valor de indexacao dela) existe na arvore principal
                 if (arvoreAux != NULL){
-                    printf("Pode remover... , %s\n ", expressao); 
-                    excluiNoArvoreA(arvoreA, chaveArvore);
-                    // printf("OLHA\n"); 
-                    // arvoreResultante(arvoreAux); 
-                    // printf("\n\n\n");  
+                    arvoreA = excluiNoArvoreA(arvoreA, chaveArvore);  
                 }
             }
 

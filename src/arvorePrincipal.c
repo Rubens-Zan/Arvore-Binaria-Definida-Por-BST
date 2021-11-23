@@ -34,18 +34,6 @@ tArvoreA *arvorePrincipalInclui(tArvoreA *arvoreA,tArvoreB *arvoreB, int valor){
     return arvoreA;
 }
 /* -------------------------------------------------------------------------- */
-void imprimeNosArvorePrincipal (tArvoreB *arvoreB){
-    printf("("); 
-    if (arvoreB != NULL){
-        printf("%d",arvoreB->chave);
-        if (arvoreB->dir != NULL || arvoreB->esq != NULL){
-            imprimeNosArvorePrincipal(arvoreB->esq);
-            imprimeNosArvorePrincipal(arvoreB->dir);
-        }
-    }
-    printf(")");
-}
-/* -------------------------------------------------------------------------- */
 void calculaChaveArvore(tArvoreB *no, int *chave){
     if (no != NULL){
         calculaChaveArvore(no->esq, chave);
@@ -56,8 +44,8 @@ void calculaChaveArvore(tArvoreB *no, int *chave){
 /* -------------------------------------------------------------------------- */
 void arvoreResultante(tArvoreA *arvoreA){
     printf("[");
-    if (arvoreA != NULL && arvoreA->chave != NULL){
-        imprimeNosArvorePrincipal(arvoreA->chave);
+    if (arvoreA != NULL && arvoreA->chave != NULL){ 
+        imprimeNosEmOrdem(arvoreA->chave); 
         int chaveArvore = 0;
         calculaChaveArvore(arvoreA->chave, &chaveArvore);
         printf(": %d\n", chaveArvore); 
@@ -68,7 +56,7 @@ void arvoreResultante(tArvoreA *arvoreA){
         }
     }
     // else{
-    //     printf("]\n"); 
+    //     printf(" \n"); 
     // }
     printf("]\n"); 
 }
@@ -117,20 +105,17 @@ tArvoreA *excluiNoArvoreA(tArvoreA *no, int chaveNo){
     else {
         // no com um filho ou sem filhos
         if (no->esq == NULL){
-            printf("sem no esquerdo... ");
-            tArvoreA *aux = no->esq;
+            tArvoreA *aux = no->dir;
             free(no);
             return aux;
         }
         else if (no->dir == NULL){
-            printf("sem no direito... ");
-            tArvoreA *aux = no->dir;
+            tArvoreA *aux = no->esq;
             free(no);
             return aux;
         }
 
         // no com dois filhos
-        printf("dois filhos... ");
         int chaveAux = 0;
         tArvoreA *aux = min(no->dir);
         calculaChaveArvore(aux->chave, &chaveAux); 

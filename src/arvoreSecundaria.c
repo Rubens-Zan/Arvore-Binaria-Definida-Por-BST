@@ -88,8 +88,28 @@ void emordem(tArvoreB *no)
     if (no != NULL)
     {
         emordem(no->esq);
-        printf(" %d \n", no->chave); 
+        printf(" %d ", no->chave); 
         emordem(no->dir);
     }
 };
+/* -------------------------------------------------------------------------- */
+void imprimeNosPreOrdem (tArvoreB *arvoreB){
+    printf("("); 
+    if (arvoreB != NULL){
+        printf("%d",arvoreB->chave);
+        if (arvoreB->dir != NULL || arvoreB->esq != NULL){
+            imprimeNosPreOrdem(arvoreB->esq);
+            imprimeNosPreOrdem(arvoreB->dir);
+        }
+    }
+    printf(")");
+}
+/* -------------------------------------------------------------------------- */
+void imprimeNosEmOrdem (tArvoreB *arvoreB){
+    if (arvoreB != NULL){
+        imprimeNosEmOrdem(arvoreB->esq);
+        printf("(%d)",arvoreB->chave);
+        imprimeNosEmOrdem(arvoreB->dir);
+    }
+}
 /* -------------------------------------------------------------------------- */
