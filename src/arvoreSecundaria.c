@@ -4,18 +4,7 @@
 #include "arvoreSecundaria.h"
 
 /* -------------------------------------------------------------------------- */
-tArvoreB *inicia(const char *valor)
-{
-    tArvoreB *n = (tArvoreB *)malloc(sizeof(tArvoreB));
-    n->chave = atoi(valor);
-    n->dir = NULL;
-    n->esq = NULL;
-
-    return n;
-}
-/* -------------------------------------------------------------------------- */
-tArvoreB *criaNo(int chave)
-{
+tArvoreB *criaNo(int chave){
     tArvoreB *n = (tArvoreB *)malloc(sizeof(tArvoreB));
     n->chave = chave;
     n->esq = NULL;
@@ -25,8 +14,7 @@ tArvoreB *criaNo(int chave)
     return n;
 };
 /* -------------------------------------------------------------------------- */
-tArvoreB *inclui(tArvoreB *no, int c)
-{
+tArvoreB *inclui(tArvoreB *no, int c){
     if (no == NULL)
         return criaNo(c);
     if (c < no->chave)
@@ -42,8 +30,7 @@ tArvoreB *inclui(tArvoreB *no, int c)
     return no;
 };
 /* -------------------------------------------------------------------------- */
-int token_to_num(const char *str, int *indice)
-{
+int token_to_num(const char *str, int *indice){
     char token[100];
     int i = 0;
     if (str[*indice] == '('){
@@ -68,8 +55,7 @@ int token_to_num(const char *str, int *indice)
     return 0; 
 };
 /* -------------------------------------------------------------------------- */
-tArvoreB *montaarvore(const char *str)
-{
+tArvoreB *montaArvoreSecundaria(const char *str){
     tArvoreB *raiz = NULL;
     int i = 0;
     raiz = inclui(NULL, token_to_num(str, &i));
@@ -83,33 +69,23 @@ tArvoreB *montaarvore(const char *str)
     return raiz;
 };
 /* -------------------------------------------------------------------------- */
-void emordem(tArvoreB *no)
-{   
-    if (no != NULL)
-    {
-        emordem(no->esq);
-        printf(" %d ", no->chave); 
-        emordem(no->dir);
-    }
-};
-/* -------------------------------------------------------------------------- */
-void imprimeNosPreOrdem (tArvoreB *arvoreB){
+void imprimeNosPreOrdem (tArvoreB *no){
     printf("("); 
-    if (arvoreB != NULL){
-        printf("%d",arvoreB->chave);
-        if (arvoreB->dir != NULL || arvoreB->esq != NULL){
-            imprimeNosPreOrdem(arvoreB->esq);
-            imprimeNosPreOrdem(arvoreB->dir);
+    if (no != NULL){
+        printf("%d",no->chave);
+        if (no->dir != NULL || no->esq != NULL){
+            imprimeNosPreOrdem(no->esq);
+            imprimeNosPreOrdem(no->dir);
         }
     }
     printf(")");
 }
 /* -------------------------------------------------------------------------- */
-void imprimeNosEmOrdem (tArvoreB *arvoreB){
-    if (arvoreB != NULL){
-        imprimeNosEmOrdem(arvoreB->esq);
-        printf("(%d)",arvoreB->chave);
-        imprimeNosEmOrdem(arvoreB->dir);
+void imprimeNosEmOrdem (tArvoreB *no){
+    if (no != NULL){
+        imprimeNosEmOrdem(no->esq);
+        printf("(%d)",no->chave);
+        imprimeNosEmOrdem(no->dir);
     }
 }
 /* -------------------------------------------------------------------------- */

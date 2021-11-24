@@ -36,26 +36,31 @@ void tratarExpressoes(char *line){
     
 }
 /* -------------------------------------------------------------------------- */
-int somarChave(const char * expressao){
+// Soma a chave de uma expressao recebida no formato de parenteses aninhados
+int calculaChaveExpressao(const char * expressao){
     int i = 0; 
     int chave = 0; 
 
     while (expressao[i] != '\0' && expressao[i] != ' '){
         if (expressao[i] == '('){
             i++; 
-            if(!(ehNumero(expressao[i+1]))){
-                chave+= expressao[i] - '0'; 
-            }
-            else {
-                char novoValor[50]; 
-                for (int j = i;(ehNumero(expressao[j]));j++){
-                    novoValor[j] = expressao[j];
-                    i++; 
+            if (ehNumero(expressao[i])){ 
+
+                if(!ehNumero(expressao[i+1])){
+                    chave+= expressao[i] - '0'; 
+                }
+                else {
+                    char novoValor[50]; 
+                    for (int j = 0;(ehNumero(expressao[i])); j++){
+                        novoValor[j] = expressao[i]; 
+                        i++;  
+                    }    
+                    chave+= atoi(novoValor); 
                 } 
-                chave+= atoi(novoValor); 
-            } 
-        }
+            }            
+        }else{
         i++; 
+        }
     }
     return chave; 
 }

@@ -24,4 +24,5 @@ Por exemplo, para o seguinte comando __i (10(8)(30))__, esse comando montará um
 ## Saída
 Para comando em que ocorrem mudanças na árvore binária (inserção e remoção), a saída é a árvore resultante porteriormente ao comando, já para o comando de busca, caso o valor de indexação da subárvore buscada a saída é o nó, cujo valor de indexação é igual ao da subárvore buscada, senão imprimi-se que a subárvore não foi encontrada. 
 A impressão das subárvores da árvore principal é feita em ordem, sendo cada nó separado por () seguido por : _valor de indexação_  por exemplo para um nó com o seguinte formato em pré ordem _(25(10(5)())())_ é impresso _(5)(10)(25): 40_. 
+
 A saída dos comandos são separadas por uma linha  vazia. 

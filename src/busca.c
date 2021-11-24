@@ -7,67 +7,60 @@
 #include "arvorePrincipal.h"
 #include "arvoreSecundaria.h"
 
-void testaArvoreBinaria(){
-    tArvoreB *arvoresB[30];
-    tArvoreA *arvoreA = NULL; 
-    int index = 0; 
+void testaArvoreBinaria(tArvoreA *arvoreA){
     
     // Enquanto existir um proximo comando, executa essa funcao
     while (proximoComando()){
-        int chaveArvore = 0; 
         char *comando = comandoAtual(); 
         char *expressao = expressaoAtual();
-        arvoresB[index] = NULL; 
+        int chaveExpressao = calculaChaveExpressao(expressao); 
 
         // Busca expressao
         if ((*comando) == 'b'){
-            calculaChaveArvore(montaarvore(expressao), &chaveArvore);
+            tArvoreA *arvoreAux = buscaArvoreB(arvoreA, chaveExpressao);
 
-            tArvoreA *arvoreAux = buscaArvoreB(arvoreA,chaveArvore);
             if (arvoreAux != NULL)
             {
                 imprimeNosEmOrdem(arvoreAux->chave); 
-                printf(": %d\n\n", chaveArvore);
+                printf(": %d\n\n", chaveExpressao);
                 
             }else {
-                printf("Nao achou!\n\n"); 
+                printf("No nao encontrado. \n\n"); 
             }
         }
-        else {
         
-            // Inserir expressao 
-            if ((*comando) == 'i' ){
-                arvoresB[index] = montaarvore(expressao);
-                calculaChaveArvore(arvoresB[index], &chaveArvore); 
-                arvoreA = arvorePrincipalInclui(arvoreA, arvoresB[index], chaveArvore); 
-                
-                index++;
-            }
+        // Inserir expressao 
+        else if ((*comando) == 'i' ){ 
+            int chaveExpressao = calculaChaveExpressao(expressao); 
+            arvoreA = arvorePrincipalInclui(arvoreA, montaArvoreSecundaria(expressao), chaveExpressao); 
 
-            // Remover expressao 
-            else if ((*comando) == 'r'){
-                calculaChaveArvore(montaarvore(expressao), &chaveArvore);    
-                tArvoreA *arvoreAux = buscaArvoreB(arvoreA, chaveArvore);
-
-                // Checagem se a subarvore passada (valor de indexacao dela) existe na arvore principal
-                if (arvoreAux != NULL){
-                    arvoreA = excluiNoArvoreA(arvoreA, chaveArvore);  
-                }
-            }
-
-           
             printf("\n[");
-                arvoreResultante(arvoreA);
-            
+            arvoreResultante(arvoreA);
             printf("]\n\n");
         }
-        
+
+        // Remover expressao 
+        else if ((*comando) == 'r'){
+            tArvoreA *arvoreAux = buscaArvoreB(arvoreA, chaveExpressao);
+
+            // Checagem se a subarvore passada (valor de indexacao dela) existe na arvore principal
+            if (arvoreAux != NULL){
+                arvoreA = excluiNoArvoreA(arvoreA, chaveExpressao);
+            }
+
+            printf("\n[");
+            arvoreResultante(arvoreA);
+            printf("]\n\n");
+        }        
     }
 }
 
+
 int main(void){
+    tArvoreA *arvoreA = NULL; 
+
     carregarComandos(); 
-    testaArvoreBinaria(); 
+    testaArvoreBinaria(arvoreA); 
 
     return 0;    
 }

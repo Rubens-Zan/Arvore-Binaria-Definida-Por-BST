@@ -19,10 +19,10 @@ tArvoreA *arvorePrincipalCriaNo(tArvoreB *arvoreB){
 tArvoreA *arvorePrincipalInclui(tArvoreA *arvoreA,tArvoreB *arvoreB, int valor){
     if (arvoreA == NULL)
         return arvorePrincipalCriaNo(arvoreB); 
-    int index = 0; 
-    calculaChaveArvore(arvoreA->chave, &index); 
+    int indexNoAtual = 0; 
+    calculaChaveArvore(arvoreA->chave, &indexNoAtual);
      
-    if (valor < index){
+    if (valor < indexNoAtual){
         arvoreA->esq = arvorePrincipalInclui(arvoreA->esq, arvoreB, valor);
         arvoreA->esq->pai = arvoreA; 
     }
@@ -55,14 +55,10 @@ void arvoreResultante(tArvoreA *arvoreA){
             arvoreResultante(arvoreA->dir); 
         }
     }
-    // else{
-    //     printf(" \n"); 
-    // }
     printf("]\n"); 
 }
 /* -------------------------------------------------------------------------- */
-tArvoreA *buscaArvoreB(tArvoreA *arvoreA, int chave)
-{
+tArvoreA *buscaArvoreB(tArvoreA *arvoreA, int chave){
     if (arvoreA == NULL)
         return 0;
     else{
@@ -78,14 +74,12 @@ tArvoreA *buscaArvoreB(tArvoreA *arvoreA, int chave)
     }
 };
 /* -------------------------------------------------------------------------- */
-tArvoreA *min(tArvoreA *arvoreB)
-{
+tArvoreA *min(tArvoreA *arvoreB){
     if (arvoreB->esq == NULL)
         return arvoreB;
     else
         return min(arvoreB->esq);
 };
-
 /* -------------------------------------------------------------------------- */
 tArvoreA *excluiNoArvoreA(tArvoreA *no, int chaveNo){
     if (no == NULL)
@@ -97,7 +91,6 @@ tArvoreA *excluiNoArvoreA(tArvoreA *no, int chaveNo){
     if (chaveNo < chaveRaiz){
         no->esq = excluiNoArvoreA(no->esq, chaveNo); 
     }
-    
     else if (chaveNo > chaveRaiz){
         no->dir = excluiNoArvoreA(no->dir, chaveNo);
     }
