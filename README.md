@@ -39,7 +39,7 @@ No seguinte formato: \
 [  \
 ]  \
 ]  \
-]  \
+] 
 
 Já para o comando de busca, é mostrado o percurso efetuado na busca pela subárvore buscada. Após o fim da busca, caso a subárvore passada foi encontrada é impresso  : \
 **No encontrado : [_chave do no em pre ordem_] : _valor de indexação_**,\
