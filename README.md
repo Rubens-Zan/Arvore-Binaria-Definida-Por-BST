@@ -21,25 +21,25 @@ Por exemplo, para o seguinte comando __i (10(8)(30))__, esse comando montará um
 
 ## Saída
 A cada comando executado é gerado uma saída, sendo separadas por linha vazia, no seguinte formato: \
-Para comando em que ocorrem mudanças na árvore binária (inserção e remoção), a saída é a árvore resultante porteriormente ao comando.\
-A impressão dos nós da árvore principal é feita em pre ordem, seguido por : _valor de indexação_  tal como o seguinte formato: \
+Para comando em que ocorrem mudanças na árvore binária (inserção e remoção), a saída é a árvore resultante porteriormente ao comando.
+A impressão dos nós da árvore principal é feita em pre ordem, seguido por : _valor de indexação_  tal como o seguinte formato: 
  _(25(10(5)())()) : 40_. 
 A impressão da árvore resultante é efetuada no formato de parênteses aninhados, utilizando  [ ] como separadores. E para a impressão das chaves dos nós da árvore principal é utilizada a mesma representação, utilizando ( ) como separadores.  
 No seguinte formato: \
-[[(1): 1
-[
-]
-[(10(8)(30)): 48
-[(11(10)(17)): 38
-[(15): 15
-]
-[(25(10(5)())()): 40
-]
-]
-[
-]
-]
-]\
+[[(1): 1 \
+[  \
+]  \
+[(10(8)(30)): 48  \
+[(11(10)(17)): 38  \
+[(15): 15  \
+]  \
+[(25(10(5)())()): 40  \
+]  \
+]  \
+[  \
+]  \
+]  \
+]  \
 
 Já para o comando de busca, é mostrado o percurso efetuado na busca pela subárvore buscada. Após o fim da busca, caso a subárvore passada foi encontrada é impresso  : \
 **No encontrado : [_chave do no em pre ordem_] : _valor de indexação_**,\
