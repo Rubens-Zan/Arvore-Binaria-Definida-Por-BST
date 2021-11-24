@@ -30,7 +30,7 @@ tArvoreB *inclui(tArvoreB *no, int c){
     return no;
 };
 /* -------------------------------------------------------------------------- */
-int token_to_num(const char *str, int *indice){
+int numeroEntreParenteses(const char *str, int *indice){
     char token[100];
     int i = 0;
     if (str[*indice] == '('){
@@ -58,11 +58,11 @@ int token_to_num(const char *str, int *indice){
 tArvoreB *montaArvoreSecundaria(const char *str){
     tArvoreB *raiz = NULL;
     int i = 0;
-    raiz = inclui(NULL, token_to_num(str, &i));
+    raiz = inclui(NULL, numeroEntreParenteses(str, &i));
     while (str[i] != '\0')
     {
         if (str[i] == '(' && ehNumero(str[i+1]))
-            inclui(raiz, token_to_num(str, &i));
+            inclui(raiz, numeroEntreParenteses(str, &i));
         else 
             i++; 
     } 

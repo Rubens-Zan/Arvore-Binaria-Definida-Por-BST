@@ -26,8 +26,7 @@ tArvoreA *arvorePrincipalInclui(tArvoreA *arvoreA,tArvoreB *arvoreB, int valor){
         arvoreA->esq = arvorePrincipalInclui(arvoreA->esq, arvoreB, valor);
         arvoreA->esq->pai = arvoreA; 
     }
-    else
-    {
+    else{
         arvoreA->dir = arvorePrincipalInclui(arvoreA->dir, arvoreB, valor);
         arvoreA->dir->pai = arvoreA;
     }
@@ -68,6 +67,7 @@ tArvoreA *buscaArvoreB(tArvoreA *arvoreA, int chave){
         calculaChaveArvore(arvoreA->chave, &chaveArvore); 
         // Impressao dos nos percorridos
         imprimeNosPreOrdem(arvoreA->chave); 
+        printf(" : %d", chaveArvore); 
         printf("\n"); 
         if ( chaveArvore == chave)
             return arvoreA;

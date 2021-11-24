@@ -7,7 +7,7 @@
 #include "arvorePrincipal.h"
 #include "arvoreSecundaria.h"
 
-void testaArvoreBinaria(tArvoreA *arvoreA){
+void testaArvoreBinariaBusca(tArvoreA *arvoreA){
     
     // Enquanto existir um proximo comando, executa essa funcao
     while (proximoComando()){
@@ -56,7 +56,7 @@ int main(void){
     tArvoreA *arvoreA = NULL; 
 
     carregarComandos(); 
-    testaArvoreBinaria(arvoreA); 
+    testaArvoreBinariaBusca(arvoreA); 
 
     return 0;    
 }

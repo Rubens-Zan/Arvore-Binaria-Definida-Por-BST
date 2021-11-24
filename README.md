@@ -1,19 +1,17 @@
 # Implementação de árvore binária de busca A, com chave definida por uma árvore binária de busca B
 Projeto 02- Disciplina CI1057\
-Autor: Rubens Zandomenighi Laszlo - GRR20206147\
+Autor: *Rubens Zandomenighi Laszlo - GRR20206147*\
 Data: 24/11/2021
 
 ## Compilação 
 Compila a partir do C, utilizando comandos make.  
-Para efetuar a compilação, basta digitar make.
-Para excluir todos os arquivos temporários digite make clean,   
+Para efetuar a compilação, basta ir ao diretório src e digitar make.
+Para excluir todos os arquivos temporários digite make clean,
 e para excluir temporários e o executável digite make purge.  
 Ao compilar criará um arquivo executável com o nome busca.
 
 ## Execução
-O programa le as expressões de entrada de um arquivo, armazenando os comandos e as expressões.
-
-Foram incluídos as entradas para testar o programa na pasta casos_teste, para efetuar a execução, basta digitar por exemplo 
+A leitura dos comandos e das expressões em parênteses aninhados é efetuada por meio de um arquivo de entrada, armazenando os comandos e as expressões. Foram incluídos os casos de teste na pasta casos_teste para execução mais fácil do programa, portanto,, basta digitar, por exemplo: 
 ./busca < ../casos_teste/1teste.in 
 
 ## Entrada
