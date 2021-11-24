@@ -11,8 +11,8 @@ e para excluir temporários e o executável digite make purge.
 Ao compilar criará um arquivo executável com o nome busca.
 
 ## Execução
-A leitura dos comandos e das expressões em parênteses aninhados é efetuada por meio de um arquivo de entrada, armazenando os comandos e as expressões. Foram incluídos os casos de teste na pasta casos_teste para execução mais fácil do programa, portanto, basta digitar, por exemplo: \
-./busca < ../casos_teste/1teste.in 
+A leitura dos comandos e das expressões em parênteses aninhados é efetuada por meio de um arquivo de entrada, armazenando os comandos e as expressões.Basta digitar : 
+./busca < _nomeDoArquivo_.in 
 
 ## Entrada
 A entrada deve conter comandos. Os comandos são i (inserção), b, (busca) e r, (remoção). Todos os comando tem um parâmetro, que aparece separado do comando por um espaço. Os comandos aparecem um por linha, seguidos por um espaço e uma subárvore passada. Essa subárvore é no formato de parênteses aninhados, representando a árvore secundária B.
