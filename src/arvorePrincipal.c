@@ -54,6 +54,8 @@ void arvoreResultante(tArvoreA *arvoreA){
             arvoreResultante(arvoreA->esq);
             arvoreResultante(arvoreA->dir); 
         }
+    }else{
+        printf("\n"); 
     }
     printf("]\n"); 
 }
