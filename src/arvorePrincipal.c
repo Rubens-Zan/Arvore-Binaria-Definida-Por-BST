@@ -45,7 +45,7 @@ void calculaChaveArvore(tArvoreB *no, int *chave){
 void arvoreResultante(tArvoreA *arvoreA){
     printf("[");
     if (arvoreA != NULL && arvoreA->chave != NULL){ 
-        imprimeNosEmOrdem(arvoreA->chave); 
+        imprimeNosPreOrdem(arvoreA->chave); 
         int chaveArvore = 0;
         calculaChaveArvore(arvoreA->chave, &chaveArvore);
         printf(": %d\n", chaveArvore); 
@@ -64,7 +64,9 @@ tArvoreA *buscaArvoreB(tArvoreA *arvoreA, int chave){
     else{
         int chaveArvore = 0;
         calculaChaveArvore(arvoreA->chave, &chaveArvore); 
-       
+        // Impressao dos nos percorridos
+        imprimeNosPreOrdem(arvoreA->chave); 
+        printf("\n"); 
         if ( chaveArvore == chave)
             return arvoreA;
         if (chave < chaveArvore)
