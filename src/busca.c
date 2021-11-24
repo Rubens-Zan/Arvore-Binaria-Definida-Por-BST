@@ -44,7 +44,7 @@ void testaArvoreBinaria(tArvoreA *arvoreA){
         else if ((*comando) == 'r'){
             arvoreA = excluiNoArvoreA(arvoreA, chaveExpressao);
             
-            printf("\n[");
+            printf("[");
             arvoreResultante(arvoreA);
             printf("]\n\n");
         }        
